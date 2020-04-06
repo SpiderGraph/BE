@@ -3,11 +3,17 @@ const router = require('express').Router()
 const Graphs = require('../models/Graphs')
 
 router.get('/', (req, res) => {
-    res.status(201).json('Get your graphs')
+    Graphs.find({}).exec(function(err, r){
+        if(!err){
+            res.status(201).json(r)
+        }else{
+            res.status(500).json('Error occured')
+        }
+    })
 })
 
-router.get('/', (req, res ) => {
-    const graphs = Graphs.find()
+router.get('/all', (req, res ) => {
+    const graphs = Graphs.find({})
     .then(data => {
         res.status(201).json(data)
     })
