@@ -1,7 +1,10 @@
 const router = require('express').Router()
 
-const Graphs = require('../../models/Graphs')
+const Graphs = require('../models/Graphs')
 
+router.get('/', (req, res) => {
+    res.status(201).json('Get your graphs')
+})
 
 router.get('/', (req, res ) => {
     const graphs = Graphs.find()
