@@ -5,7 +5,7 @@ const helmet = require('helmet')
 // DB
 const mongoose = require('mongoose')
 // import Routes
-const graphRoute = require('../routers/graphs/graphsRouter')
+const graphRoute = require('../routers/graphsRouter')
 
 // Apply middleware
 server.use(express.json())
