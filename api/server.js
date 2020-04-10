@@ -6,13 +6,17 @@ const helmet = require('helmet')
 const mongoose = require('mongoose')
 // import Routes
 const graphRoute = require('../routers/graphsRouter')
+const userRoute = require('../routers/authRouter')
+// auth
+const auth = require('./authorization')
 
 // Apply middleware
 server.use(express.json())
 server.use(helmet())
 server.use(cors())
 // Apply routers
-server.use('/graphs', graphRoute)
+server.use('/graphs', auth, graphRoute)
+server.use('/auth', userRoute)
 
 server.get('/', (req, res) => {
     res.status(200).json('Heyhey')
