@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const GraphSchema = mongoose.Schema({
+    user_id: String,
     graphName: String,
     dataSets: [{
             radius: [Number],
