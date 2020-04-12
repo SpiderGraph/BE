@@ -12,7 +12,7 @@ router.get('/', (req, res ) => {
 
 router.post('/', (req, res) => {
     const body = req.body
-    body.user_id = req.user.id
+    body.user_id = req.user.user_id
     const graph = new Graphs(body)
     graph.save()
     .then(data => {
