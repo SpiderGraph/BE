@@ -23,6 +23,7 @@ router.post('/login', (req, res) => {
             console.log('DATA ', data)
             console.log('BCRYPT ', bcrypt.compareSync(password, data.password))
             if(data && bcrypt.compareSync(password, data.password)){
+                console.log('INSIDE')
                 const token = generateToken(data)
                 res.status(200).json(token)
             }
