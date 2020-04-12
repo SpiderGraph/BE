@@ -28,7 +28,7 @@ router.post('/login', (req, res) => {
                 res.status(200).json(token)
             }
         })
-        .catch(err => res.status(400).json({errorMessage: "Invalid Credentials"}))
+        // .catch(err => res.status(400).json({errorMessage: "Invalid Credentials"}))
     }
 })
 
