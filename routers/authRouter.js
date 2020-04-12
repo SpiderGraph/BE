@@ -17,8 +17,11 @@ router.post('/register', validateUser, hashPassword, (req, res) => {
 router.post('/login', (req, res) => {
     const {username, password} = req.body
     if(username && password){
+        console.log('CREDENTIALS ', req.body)
         Users.findOne().where({username: username})
         .then(data => {
+            console.log('DATA ', data)
+            console.log('BCRYPT ', bcrypt.compareSync(password, data.password))
             if(data && bcrypt.compareSync(password, data.password)){
                 const token = generateToken(data)
                 res.status(200).json(token)
