@@ -31,7 +31,7 @@ router.post('/login', validateCredentials, (req, res) => {
 function validateCredentials(req, res, next){
     const {username, password} = req.body
     if(username && password){
-        next
+        next()
     }else{
         res.status(400).json({errorMessage: "No credentials"})
     }
