@@ -22,10 +22,10 @@ router.post('/login', validateCredentials, (req, res) => {
             const token = generateToken(data)
             res.status(200).json(token)
         }else{
-            res.status(400).json({errorMessage: "Invalid password"})
+            res.status(400).json({errorMessage: "Invalid credentials"})
         }
     })
-    .catch(err => res.status(400).json({errorMessage: "User name does not exist"}))
+    .catch(err => res.status(400).json({errorMessage: "Invalid credentials"}))
 })
 
 function validateCredentials(req, res, next){
