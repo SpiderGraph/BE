@@ -14,19 +14,28 @@ router.post('/register', validateUser, hashPassword, (req, res) => {
 })
 
 // login
-router.post('/login', (req, res) => {
+router.post('/login', validateCredentials, (req, res) => {
+    const {username, password} = req.body
+    Users.findOne().where({username: username})
+    .then(data => {
+        if(data && bcrypt.compareSync(password, data.password)){
+            const token = generateToken(data)
+            res.status(200).json(token)
+        }else{
+            res.status(400).json({errorMessage: "Invalid password"})
+        }
+    })
+    .catch(err => res.status(400).json({errorMessage: "User name does not exist"}))
+})
+
+function validateCredentials(req, res, next){
     const {username, password} = req.body
     if(username && password){
-        Users.findOne().where({username: username})
-        .then(data => {
-            if(data && bcrypt.compareSync(password, data.password)){
-                const token = generateToken(data)
-                res.status(200).json(token)
-            }
-        })
-        .catch(err => res.status(400).json({errorMessage: "Invalid Credentials"}))
+        next
+    }else{
+        res.status(400).json({errorMessage: "No credentials"})
     }
-})
+}
 
 function validateUser(req, res, next){
     const {username, password} = req.body
